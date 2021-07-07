@@ -1,10 +1,15 @@
-import requests, sys
+import requests, sys , set_log
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from time import sleep
 
+
+def answertolog():
+    print('===============')
+    print('i here you log')
+    print('===============')
 
 '''command to go back to list and click on the list'''
 def back_to_search(driver):
@@ -85,6 +90,16 @@ def get_sellers(driver):
     if list_count == len(sellers):  # -1 removed 
         print('last item in current page')
         glb_idx = 0
+
+        if len(sellers) < 12:
+            print('******************')
+            print('sellers is less 12 and in last count got the last item endding program')
+            print('******************') 
+            sleep(4)
+            driver.close()
+            print('bye')
+            exit()
+
         nextBtn = driver.find_element_by_class_name('pagination-next')
         nextBtn.click()
         sleep(3)
@@ -104,6 +119,9 @@ def get_sellers(driver):
     contect_btn =  driver.find_elements_by_css_selector('._contactCompany.button.primary.iconized > span')
     if contect_btn:
         print('yes contect btn')
+        leave_log('contacted')
+
+        
 
         contect_btn[0].click()
         sleep(3)
@@ -114,9 +132,15 @@ def get_sellers(driver):
         
     else:
         print('no contect btn')
+        leave_log('yet contect')
         back_to_search(driver)
 
     
+
+def leave_log(type):
+    print('leaving log', type)
+    set_log.set_log(glb_driver, type)
+
 
 
 
@@ -128,8 +152,11 @@ def run_sel():
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome(options=options)
-
+    global glb_driver
+    glb_driver = driver
    # driver = webdriver.Chrome(chrome_driver)
+
+    #tar_url = 'https://www.archiproducts.com/en/resellers/south-korea'
 
     tar_url = 'https://www.archiproducts.com/en/resellers'
     #tar_url = 'https://www.archiproducts.com/en/resellers/834'
@@ -143,6 +170,7 @@ def main():
 
 '''global variable'''
 glb_idx = 0
+glb_driver = ""
 if __name__ == "__main__":
     main()
     input1 = input()
@@ -150,5 +178,6 @@ if __name__ == "__main__":
 
     if input1 == 'end':
         print('endding')
+
     else:
         print('running')
