@@ -22,4 +22,9 @@ class Place:
         txt += f'{self.number}\n'
 
         print(txt)
+
+        f = open("saved_data.txt", 'a',encoding='utf8')
+        f.write(txt)
+        f.close()
+
    
