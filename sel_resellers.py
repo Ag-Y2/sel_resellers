@@ -159,7 +159,7 @@ def run_sel():
     #tar_url = 'https://www.archiproducts.com/en/resellers/south-korea'
 
     tar_url = 'https://www.archiproducts.com/en/resellers'
-    #tar_url = 'https://www.archiproducts.com/en/resellers/834'
+
     
     driver.get(tar_url)
     get_sellers(driver)
