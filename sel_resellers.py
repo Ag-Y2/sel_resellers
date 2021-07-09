@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+
 from time import sleep
 
 
@@ -13,7 +14,7 @@ def answertolog():
 
 '''command to go back to list and click on the list'''
 def back_to_search(driver):
-    print('back and search')
+    #print('back and search')
 
     tabs = driver.window_handles
    # if tabs.Count > 1:
@@ -28,7 +29,7 @@ def back_to_search(driver):
 insertting information to input box and send
 '''
 def set_request(driver):
-    print('setting request')
+    #print('setting request')
 
     sendAmessage_field =  driver.find_elements_by_css_selector('.message__container > textarea')
     sendAmessage_field[0].send_keys('hi this is mkb')
@@ -77,9 +78,9 @@ def get_sellers(driver):
     
     sellers =  driver.find_elements_by_css_selector('.button.small.light.border.flat.ripple-effect.expanded.actionPath')
 
-    print(len(sellers))
+    #print(len(sellers))
 
-    print('sellers len')
+    #print('sellers len')
     if  len(sellers) == 0:
         print('seller is none')
         sleep(4)
@@ -88,7 +89,7 @@ def get_sellers(driver):
         exit()
 
     if list_count == len(sellers):  # -1 removed 
-        print('last item in current page')
+        #print('last item in current page')
         glb_idx = 0
 
         if len(sellers) < 12:
@@ -106,7 +107,7 @@ def get_sellers(driver):
         get_sellers(driver)
     else:
         sellers[list_count].click()
-        print('stay on current page // list_count +1')
+        #print('stay on current page // list_count +1')
         list_count += 1
         glb_idx = list_count
 
@@ -118,10 +119,8 @@ def get_sellers(driver):
     driver.switch_to_window(tabs[1])
     contect_btn =  driver.find_elements_by_css_selector('._contactCompany.button.primary.iconized > span')
     if contect_btn:
-        print('yes contect btn')
-        leave_log('contacted')
-
-        
+        #print('yes contect btn')
+        leave_log('YES contect\n')
 
         contect_btn[0].click()
         sleep(3)
@@ -131,14 +130,14 @@ def get_sellers(driver):
      #   contect_btn[0].send_keys(Keys.ENTER)
         
     else:
-        print('no contect btn')
-        leave_log('yet contect')
+        #print('no contect btn')
+        leave_log('NO contect\n')
         back_to_search(driver)
 
     
 
 def leave_log(type):
-    print('leaving log', type)
+    #print('leaving log', type)
     set_log.set_log(glb_driver, type)
 
 
@@ -165,7 +164,7 @@ def run_sel():
     get_sellers(driver)
 
 def main():
-    print('testing')
+    #print('testing')
     run_sel()
 
 '''global variable'''
@@ -174,7 +173,7 @@ glb_driver = ""
 if __name__ == "__main__":
     main()
     input1 = input()
-    print(input1)
+    #print(input1)
 
     if input1 == 'end':
         print('endding')
