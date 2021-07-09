@@ -190,7 +190,9 @@ def run_sel():
         get_a = glb_driver.find_elements_by_css_selector('main nav ul li a')
         temp_text = get_a[i].text
         set_area(i)
-        print(f'************{temp_text}************')
+        f = open("saved_data.txt", 'a',encoding='utf8')
+        f.write(f'************{temp_text}************\n\n')
+        f.close()
         set_place()
 
     print('bye')

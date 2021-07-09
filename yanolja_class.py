@@ -19,9 +19,9 @@ class Place:
 
         txt = f'{self.name} \n'
         txt += f'{self.email} \n'
-        txt += f'{self.number}\n'
+        txt += f'{self.number}\n\n'
 
-        print(txt)
+        #print(txt)
 
         f = open("saved_data.txt", 'a',encoding='utf8')
         f.write(txt)
